@@ -4,18 +4,18 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class EnumPriorityTest {
+class PriorityTest {
 
     @Test
     void sortTest() {
         // given
-        final var enumPriorities = List.of(EnumPriority.FIRST, EnumPriority.SECOND, EnumPriority.THIRD);
+        final var enumPriorities = List.of(Priority.FIRST, Priority.SECOND, Priority.THIRD);
 
         // when
         final var list = enumPriorities.stream()
-                .max(EnumPriority.getComparator());
+                .max(Priority.getComparator());
 
         // then
-        assertThat(list.get()).isEqualTo(EnumPriority.FIRST);
+        assertThat(list.get()).isEqualTo(Priority.FIRST);
     }
 }

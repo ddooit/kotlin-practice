@@ -1,13 +1,13 @@
 package org.example
 
 import DiscountStrategy
-import EnumPriority
+import Priority
 import java.time.LocalDateTime
 
 class Discount private constructor(
     val strategy: DiscountStrategy,
     val rateOrFixed: Double,
-    val priority: EnumPriority,
+    val priority: Priority,
     val start: LocalDateTime,
     val end: LocalDateTime
 ) {
@@ -24,11 +24,11 @@ class Discount private constructor(
             Discount(strategy, rateOrFixed, strategy.priorityWithPeriod(), start, end)
     }
 
-    fun getPriority(target: LocalDateTime): EnumPriority {
+    fun getPriority(target: LocalDateTime): Priority {
         if (valid(target)) {
             return priority
         }
-        return EnumPriority.LAST
+        return Priority.LAST
     }
 
     fun getPrice(price: Double, target: LocalDateTime): Double {

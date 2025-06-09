@@ -6,13 +6,13 @@ public enum DiscountStrategy {
         }
 
         @Override
-        public EnumPriority priority() {
-            return EnumPriority.FOURTH;
+        public Priority priority() {
+            return Priority.FOURTH;
         }
 
         @Override
-        public EnumPriority priorityWithPeriod() {
-            return EnumPriority.SECOND;
+        public Priority priorityWithPeriod() {
+            return Priority.SECOND;
         }
     },
     RATE {
@@ -22,19 +22,19 @@ public enum DiscountStrategy {
         }
 
         @Override
-        public EnumPriority priority() {
-            return EnumPriority.THIRD;
+        public Priority priority() {
+            return Priority.THIRD;
         }
 
         @Override
-        public EnumPriority priorityWithPeriod() {
-            return EnumPriority.FIRST;
+        public Priority priorityWithPeriod() {
+            return Priority.FIRST;
         }
     };
 
     public abstract double calculate(double price, double rateOrFixed);
 
-    public abstract EnumPriority priority();
+    public abstract Priority priority();
 
-    public abstract EnumPriority priorityWithPeriod();
+    public abstract Priority priorityWithPeriod();
 }

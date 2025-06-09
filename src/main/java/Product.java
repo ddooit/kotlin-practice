@@ -24,7 +24,7 @@ public record Product(
         }
         final var maxPriority = discountList.stream()
                 .map(discount -> discount.getPriority(target))
-                .max(EnumPriority.getComparator())
+                .max(Priority.getComparator())
                 .orElseThrow();
 
         return discountList.stream()

@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public enum EnumPriority {
+public enum Priority {
     FIRST(1),
     SECOND(2),
     THIRD(3),
@@ -9,11 +9,11 @@ public enum EnumPriority {
 
     private final int value;
 
-    EnumPriority(final int value) {
+    Priority(final int value) {
         this.value = value;
     }
 
-    public static Comparator<EnumPriority> getComparator() {
+    public static Comparator<Priority> getComparator() {
         return (enum1, enum2) -> enum2.value - enum1.value;
     }
 

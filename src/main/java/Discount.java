@@ -3,11 +3,11 @@ import java.time.LocalDateTime;
 public class Discount {
     private final DiscountStrategy strategy;
     private final double rateOrFixed;
-    private final EnumPriority priority;
+    private final Priority priority;
     private final LocalDateTime start;
     private final LocalDateTime end;
 
-    private Discount(final DiscountStrategy strategy, final double rateOrFixed, final EnumPriority priority, final LocalDateTime start, final LocalDateTime end) {
+    private Discount(final DiscountStrategy strategy, final double rateOrFixed, final Priority priority, final LocalDateTime start, final LocalDateTime end) {
         this.strategy = strategy;
         this.rateOrFixed = rateOrFixed;
         this.priority = priority;
@@ -23,11 +23,11 @@ public class Discount {
         return new Discount(strategy, rateOrFixed, strategy.priority(), LocalDateTime.MIN, LocalDateTime.MAX);
     }
 
-    public EnumPriority getPriority(final LocalDateTime target) {
+    public Priority getPriority(final LocalDateTime target) {
         if (valid(target)) {
             return priority;
         }
-        return EnumPriority.LAST;
+        return Priority.LAST;
     }
 
     public double getPrice(final double price, final LocalDateTime target) {
