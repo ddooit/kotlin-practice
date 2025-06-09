@@ -5,6 +5,7 @@ import coupon.Member
 import coupon.MemberGrade
 import org.assertj.core.api.Assertions.assertThat
 import org.example.coupon.Coupon
+import org.example.coupon.Coupon.Companion.createFreeDelivery
 import org.example.coupon.CouponIssueService
 import org.example.coupon.CouponStore
 import org.junit.jupiter.api.DisplayName
@@ -99,10 +100,7 @@ class CouponTest {
     }
 
     class MockedStoreWhenExistIssuedCoupon : CouponStore {
-        override fun findIssuedCouponsByMemberId(memberId: UUID): List<Coupon> =
-            listOf(
-                Coupon(memberId = memberId, type = FREE_DELIVERY, code = "", description = "")
-            )
+        override fun findIssuedCouponsByMemberId(memberId: UUID): List<Coupon> = listOf(createFreeDelivery(memberId))
 
         override fun remainingCountMap(): Map<CouponType, Int> = mapOf(FREE_DELIVERY to 1_000, TEN_PERCENT to 500)
 
@@ -110,10 +108,7 @@ class CouponTest {
     }
 
     class MockedStoreWhenMaxOverCoupon : CouponStore {
-        override fun findIssuedCouponsByMemberId(memberId: UUID): List<Coupon>  =
-            listOf(
-                Coupon(memberId = memberId, type = FREE_DELIVERY, code = "", description = "")
-            )
+        override fun findIssuedCouponsByMemberId(memberId: UUID): List<Coupon> = listOf(createFreeDelivery(memberId))
 
         override fun remainingCountMap(): Map<CouponType, Int> = mapOf(FREE_DELIVERY to 0, TEN_PERCENT to 500)
 
