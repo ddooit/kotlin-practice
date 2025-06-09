@@ -1,9 +1,9 @@
 package org.example.coupon
 
-import coupon.CouponStatus
-import coupon.CouponType
-import coupon.CouponType.FREE_DELIVERY
-import coupon.CouponType.TEN_PERCENT
+import org.example.java.coupon.CouponStatus
+import org.example.java.coupon.CouponType
+import org.example.java.coupon.CouponType.FREE_DELIVERY
+import org.example.java.coupon.CouponType.TEN_PERCENT
 import java.util.UUID
 import java.time.Instant
 import java.time.temporal.ChronoUnit

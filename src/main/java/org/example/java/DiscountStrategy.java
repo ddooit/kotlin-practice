@@ -1,3 +1,5 @@
+package org.example.java;
+
 public enum DiscountStrategy {
     FIXED {
         @Override

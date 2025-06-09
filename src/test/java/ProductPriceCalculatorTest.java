@@ -1,3 +1,6 @@
+import org.example.java.Discount;
+import org.example.java.DiscountStrategy;
+import org.example.java.Product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

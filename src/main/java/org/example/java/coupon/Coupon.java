@@ -1,11 +1,11 @@
-package coupon;
+package org.example.java.coupon;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.util.UUID;
 
-import static coupon.CouponStatus.ISSUED;
+import static org.example.java.coupon.CouponStatus.ISSUED;
 
 public final class Coupon {
     private final UUID id;

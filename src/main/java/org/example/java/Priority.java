@@ -1,3 +1,5 @@
+package org.example.java;
+
 import java.util.Comparator;
 
 public enum Priority {

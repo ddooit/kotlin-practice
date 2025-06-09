@@ -1,3 +1,4 @@
+import org.example.java.Priority;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

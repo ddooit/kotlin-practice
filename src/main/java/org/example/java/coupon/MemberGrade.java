@@ -1,4 +1,4 @@
-package coupon;
+package org.example.java.coupon;
 
 public enum MemberGrade {
     BRONZE,

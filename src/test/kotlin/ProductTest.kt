@@ -1,4 +1,6 @@
+import org.example.Discount
 import org.example.Product
+import org.example.java.DiscountStrategy
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -32,7 +34,7 @@ class ProductTest {
             RandomTestUtils.randomLong(),
             RandomTestUtils.randomAlphaString(),
             3000.0,
-            listOf(Discount.of(DiscountStrategy.FIXED, 1000.0))
+            listOf(Discount(DiscountStrategy.FIXED, 1000.0))
         )
 
         // when
@@ -50,7 +52,7 @@ class ProductTest {
             RandomTestUtils.randomLong(),
             RandomTestUtils.randomAlphaString(),
             3000.0,
-            listOf(Discount.of(DiscountStrategy.RATE, 0.1))
+            listOf(Discount(DiscountStrategy.RATE, 0.1))
         )
 
         // when
@@ -69,8 +71,8 @@ class ProductTest {
             RandomTestUtils.randomAlphaString(),
             3000.0,
             listOf(
-                Discount.of(DiscountStrategy.RATE, 0.1, LocalDateTime.MIN, LocalDateTime.MAX),
-                Discount.of(DiscountStrategy.FIXED, 1000.0)
+                Discount(DiscountStrategy.RATE, 0.1, LocalDateTime.MIN, LocalDateTime.MAX),
+                Discount(DiscountStrategy.FIXED, 1000.0)
             )
         )
 
@@ -91,7 +93,7 @@ class ProductTest {
             RandomTestUtils.randomLong(),
             RandomTestUtils.randomAlphaString(),
             3000.0,
-            listOf(Discount.of(DiscountStrategy.RATE, 0.1, start, end))
+            listOf(Discount(DiscountStrategy.RATE, 0.1, start, end))
         )
 
         // when
@@ -109,7 +111,7 @@ class ProductTest {
             RandomTestUtils.randomLong(),
             RandomTestUtils.randomAlphaString(),
             3000.0,
-            listOf(Discount.of(DiscountStrategy.FIXED, 4000.0))
+            listOf(Discount(DiscountStrategy.FIXED, 4000.0))
         )
 
         // when
@@ -128,10 +130,10 @@ class ProductTest {
             RandomTestUtils.randomAlphaString(),
             3000.0,
             listOf(
-                Discount.of(DiscountStrategy.RATE, 0.1, LocalDateTime.MIN, LocalDateTime.MAX),
-                Discount.of(DiscountStrategy.FIXED, 3000.0, LocalDateTime.MIN, LocalDateTime.MAX),
-                Discount.of(DiscountStrategy.RATE, 0.2),
-                Discount.of(DiscountStrategy.FIXED, 4000.0)
+                Discount(DiscountStrategy.RATE, 0.1, LocalDateTime.MIN, LocalDateTime.MAX),
+                Discount(DiscountStrategy.FIXED, 3000.0, LocalDateTime.MIN, LocalDateTime.MAX),
+                Discount(DiscountStrategy.RATE, 0.2),
+                Discount(DiscountStrategy.FIXED, 4000.0)
             )
         )
 

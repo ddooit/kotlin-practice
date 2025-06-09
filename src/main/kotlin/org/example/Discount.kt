@@ -1,19 +1,19 @@
 package org.example
 
-import DiscountStrategy
-import Priority
+import org.example.java.DiscountStrategy
+import org.example.java.Priority
 import java.time.LocalDateTime
 
 class Discount private constructor(
     val strategy: DiscountStrategy,
     val rateOrFixed: Double,
     val priority: Priority,
-    val start: LocalDateTime,
-    val end: LocalDateTime
+    val start: LocalDateTime = LocalDateTime.MIN,
+    val end: LocalDateTime = LocalDateTime.MAX
 ) {
     companion object {
         operator fun invoke(strategy: DiscountStrategy, rateOrFixed: Double): Discount =
-            Discount(strategy, rateOrFixed, strategy.priority(), LocalDateTime.MIN, LocalDateTime.MAX)
+            Discount(strategy = strategy, rateOrFixed = rateOrFixed, priority = strategy.priority())
 
         operator fun invoke(
             strategy: DiscountStrategy,
@@ -38,8 +38,9 @@ class Discount private constructor(
         return strategy.calculate(price, rateOrFixed).nonNegative()
     }
 
-    private fun valid(target: LocalDateTime): Boolean = start.isBefore(target) && end.isBefore(target)
+    private fun valid(target: LocalDateTime): Boolean =
+        start.isBefore(target)
+                && end.isBefore(target)
 
     private fun Double.nonNegative(): Double = this.coerceAtLeast(0.0)
 }
-

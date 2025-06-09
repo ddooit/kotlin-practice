@@ -32,7 +32,9 @@ class Product(
 
     private fun getMinPrice(target: LocalDateTime, discountList: List<Discount>): Double {
         return discountList.fold(price) { acc, discount ->
-            minOf(acc, discount.getPrice(price, target))
+            minOf(
+                acc,
+                discount.getPrice(price, target))
         }
     }
 

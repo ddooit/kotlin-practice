@@ -1,4 +1,4 @@
-import coupon.*;
+import org.example.java.coupon.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static coupon.CouponType.FREE_DELIVERY;
-import static coupon.CouponType.TEN_PERCENT;
-import static coupon.MemberGrade.*;
+import static org.example.java.coupon.CouponType.FREE_DELIVERY;
+import static org.example.java.coupon.CouponType.TEN_PERCENT;
+import static org.example.java.coupon.MemberGrade.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CouponIssueServiceTest {

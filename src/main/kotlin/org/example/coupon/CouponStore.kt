@@ -1,6 +1,6 @@
 package org.example.coupon
 
-import coupon.CouponType
+import org.example.java.coupon.CouponType
 import java.util.UUID
 
 interface CouponStore {

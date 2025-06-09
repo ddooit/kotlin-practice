@@ -1,4 +1,4 @@
-package coupon;
+package org.example.java.coupon;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,8 +1,8 @@
-import coupon.CouponType
-import coupon.CouponType.FREE_DELIVERY
-import coupon.CouponType.TEN_PERCENT
-import coupon.Member
-import coupon.MemberGrade
+import org.example.java.coupon.CouponType
+import org.example.java.coupon.CouponType.FREE_DELIVERY
+import org.example.java.coupon.CouponType.TEN_PERCENT
+import org.example.java.coupon.Member
+import org.example.java.coupon.MemberGrade
 import org.assertj.core.api.Assertions.assertThat
 import org.example.coupon.Coupon
 import org.example.coupon.Coupon.Companion.createFreeDelivery
