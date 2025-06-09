@@ -35,7 +35,7 @@ class Discount private constructor(
         if (!valid(target)) {
             return Double.MAX_VALUE
         }
-        return strategy.calculate(price, rateOrFixed).nonNegative();
+        return strategy.calculate(price, rateOrFixed).nonNegative()
     }
 
     private fun valid(target: LocalDateTime): Boolean = start.isBefore(target) && end.isBefore(target)
