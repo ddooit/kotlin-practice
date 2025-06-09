@@ -24,7 +24,7 @@ class CouponTest {
         val bronzeMember = Member.of(MemberGrade.BRONZE)
 
         // when
-        val actual = underTest.getCoupons(bronzeMember)
+        val actual = underTest.issueCouponsFor(bronzeMember)
 
         // then
         assertThat(actual).isEmpty()
@@ -37,7 +37,7 @@ class CouponTest {
         val silverMember = Member.of(MemberGrade.SILVER)
 
         // when
-        val actual = underTest.getCoupons(silverMember)
+        val actual = underTest.issueCouponsFor(silverMember)
 
         // then
         assertThat(actual).hasSize(1)
@@ -53,8 +53,8 @@ class CouponTest {
         val platinumMember = Member.of(MemberGrade.PLATINUM)
 
         // when
-        val actualGold = underTest.getCoupons(goldMember)
-        val actualPlatinum = underTest.getCoupons(platinumMember)
+        val actualGold = underTest.issueCouponsFor(goldMember)
+        val actualPlatinum = underTest.issueCouponsFor(platinumMember)
 
         // then
         assertThat(actualGold).hasSize(2)
@@ -71,7 +71,7 @@ class CouponTest {
         val silverMember = Member.of(MemberGrade.SILVER)
 
         // when
-        val actual = underTestWithSameTypeCouponExist.getCoupons(silverMember)
+        val actual = underTestWithSameTypeCouponExist.issueCouponsFor(silverMember)
 
         // then
         assertThat(actual).isEmpty()
@@ -85,7 +85,7 @@ class CouponTest {
         val silverMember = Member.of(MemberGrade.SILVER)
 
         // when
-        val actual = underTestWithMaxOverCouponCount.getCoupons(silverMember)
+        val actual = underTestWithMaxOverCouponCount.issueCouponsFor(silverMember)
 
         // then
         assertThat(actual).isEmpty()

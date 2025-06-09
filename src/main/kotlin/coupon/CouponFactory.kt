@@ -24,5 +24,5 @@ object CouponFactory {
 
     fun byMember(member: Member): List<Coupon> = strategies[member.grade()]
         ?.map { it(member.id()) }
-        ?: emptyList();
+        ?: emptyList()
 }

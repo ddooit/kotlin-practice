@@ -6,7 +6,7 @@ class CouponIssueService(
     val couponStore: CouponStore
 ) {
 
-    fun getCoupons(member: Member): List<Coupon> {
+    fun issueCouponsFor(member: Member): List<Coupon> {
         val issuedCouponTypeSet = couponStore.findIssuedCouponsByMemberId(member.id())
             .map { it.type }
             .toSet()
