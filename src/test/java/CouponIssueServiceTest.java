@@ -2,6 +2,7 @@ import coupon.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -40,7 +41,7 @@ class CouponIssueServiceTest {
         // then
         assertThat(actual).hasSize(1);
         assertThat(actual.getFirst().type()).isEqualTo(FREE_DELIVERY);
-        assertThat(actual.getFirst().issuedAt().plusDays(7L)).isEqualTo(actual.getFirst().validUntil());
+        assertThat(actual.getFirst().issuedAt().plus(7L, ChronoUnit.DAYS)).isEqualTo(actual.getFirst().validUntil());
     }
 
     @Test

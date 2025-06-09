@@ -1,7 +1,7 @@
 package coupon;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -11,23 +11,23 @@ public final class Coupon {
     private final UUID id;
     private final UUID memberId;
     private final CouponType type;
-    private final LocalDateTime issuedAt;
-    private final LocalDateTime validUntil;
+    private final Instant issuedAt;
+    private final Instant validUntil;
     private final CouponStatus status;
     private final String code;
     private final String description;
-    private final LocalDateTime usedAt;
+    private final Instant usedAt;
 
     private Coupon(
             UUID id,
             UUID memberId,
             CouponType type,
-            LocalDateTime issuedAt,
-            LocalDateTime validUntil,
+            Instant issuedAt,
+            Instant validUntil,
             CouponStatus status,
             String code,
             String description,
-            LocalDateTime usedAt
+            Instant usedAt
     ) {
         this.id = id;
         this.memberId = memberId;
@@ -41,8 +41,8 @@ public final class Coupon {
     }
 
     public static Coupon of(final UUID memberId, final CouponType type, final String code, final String description) {
-        final var issuedAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
-        return new Coupon(UUID.randomUUID(), memberId, type, issuedAt, issuedAt.plusDays(7), ISSUED, code, description, null);
+        final var issuedAt = Instant.now();
+        return new Coupon(UUID.randomUUID(), memberId, type, issuedAt, issuedAt.plus(7L, ChronoUnit.DAYS), ISSUED, code, description, null);
     }
 
     public UUID id() {
@@ -57,11 +57,11 @@ public final class Coupon {
         return type;
     }
 
-    public LocalDateTime issuedAt() {
+    public Instant issuedAt() {
         return issuedAt;
     }
 
-    public LocalDateTime validUntil() {
+    public Instant validUntil() {
         return validUntil;
     }
 
@@ -77,7 +77,7 @@ public final class Coupon {
         return description;
     }
 
-    public LocalDateTime usedAt() {
+    public Instant usedAt() {
         return usedAt;
     }
 
