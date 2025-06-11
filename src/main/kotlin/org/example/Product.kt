@@ -1,5 +1,6 @@
 package org.example
 
+import org.example.java.Priority
 import java.time.LocalDateTime
 
 class Product(
@@ -22,8 +23,8 @@ class Product(
         }
 
         val maxPriority = discountList
-            .maxBy { it.getPriority(target) }
-            .getPriority(target)
+            .map { it.getPriority(target) }
+            .maxWith (Priority.getComparator())
 
         return discountList
             .filter { it.getPriority(target) == maxPriority }

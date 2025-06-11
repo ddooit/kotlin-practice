@@ -39,8 +39,7 @@ class Discount private constructor(
     }
 
     private fun valid(target: LocalDateTime): Boolean =
-        start.isBefore(target)
-                && end.isBefore(target)
+        start.isBefore(target) && end.isAfter(target)
 
     private fun Double.nonNegative(): Double = this.coerceAtLeast(0.0)
 }
