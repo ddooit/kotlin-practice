@@ -1,6 +1,6 @@
 package org.example.coupon
 
-import org.example.java.coupon.Member
+import org.example.java.member.Member
 
 class CouponIssueService(
     val couponStore: CouponStore

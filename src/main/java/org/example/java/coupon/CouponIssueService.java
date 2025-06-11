@@ -1,5 +1,7 @@
 package org.example.java.coupon;
 
+import org.example.java.member.Member;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

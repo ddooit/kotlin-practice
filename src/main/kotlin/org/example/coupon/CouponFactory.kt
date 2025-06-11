@@ -1,8 +1,8 @@
 package org.example.coupon
 
-import org.example.java.coupon.Member
-import org.example.java.coupon.MemberGrade
-import org.example.java.coupon.MemberGrade.*
+import org.example.java.member.Member
+import org.example.java.member.MemberGrade
+import org.example.java.member.MemberGrade.*
 import org.example.coupon.Coupon.Companion.createFreeDelivery
 import org.example.coupon.Coupon.Companion.createTenPercent
 import java.util.*

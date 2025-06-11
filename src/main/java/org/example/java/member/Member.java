@@ -1,4 +1,4 @@
-package org.example.java.coupon;
+package org.example.java.member;
 
 import java.util.Objects;
 import java.util.UUID;
