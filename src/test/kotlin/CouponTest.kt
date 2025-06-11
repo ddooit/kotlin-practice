@@ -6,7 +6,7 @@ import org.example.java.member.MemberGrade
 import org.assertj.core.api.Assertions.assertThat
 import org.example.coupon.Coupon
 import org.example.coupon.Coupon.Companion.createFreeDelivery
-import org.example.coupon.CouponIssueService
+import org.example.coupon.CouponIssueServiceImpl
 import org.example.coupon.CouponStore
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -15,7 +15,7 @@ import java.util.*
 
 class CouponTest {
 
-    private val underTest = CouponIssueService(MockedStore())
+    private val underTest = CouponIssueServiceImpl(MockedStore())
 
     @Test
     @DisplayName("BRONZE 등급은 어떤 쿠폰도 발급되지 않아야 한다")
@@ -67,7 +67,7 @@ class CouponTest {
     @DisplayName("동일 쿠폰을 이미 발급받은 경우 중복 발급되지 않아야 한다")
     fun should_not_issue_when_same_type_coupon_exist() {
         // given
-        val underTestWithSameTypeCouponExist = CouponIssueService(MockedStoreWhenExistIssuedCoupon())
+        val underTestWithSameTypeCouponExist = CouponIssueServiceImpl(MockedStoreWhenExistIssuedCoupon())
         val silverMember = Member.of(MemberGrade.SILVER)
 
         // when
@@ -81,7 +81,7 @@ class CouponTest {
     @DisplayName("하루 최대 발급 수 제한을 초과하면 발급이 차단되어야 한다")
     fun should_not_issue_when_max_over_count_per_day() {
         // given
-        val underTestWithMaxOverCouponCount = CouponIssueService(MockedStoreWhenMaxOverCoupon())
+        val underTestWithMaxOverCouponCount = CouponIssueServiceImpl(MockedStoreWhenMaxOverCoupon())
         val silverMember = Member.of(MemberGrade.SILVER)
 
         // when

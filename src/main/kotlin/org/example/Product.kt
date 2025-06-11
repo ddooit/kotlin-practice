@@ -1,42 +1,22 @@
 package org.example
 
-import org.example.java.Priority
-import java.time.LocalDateTime
+import java.time.Instant
 
 class Product(
     val id: Long,
     val name: String,
     val price: Double,
-    val discountList: List<Discount>
+    val deliveryFee: Double = 0.0,
+    val discountList: List<DiscountCondition>
 ) {
-    fun discountedPrice(target: LocalDateTime): Double {
-        val discountList = appliedDiscounts(target)
-            .takeIf { it.isNotEmpty() }
-            ?: this@Product.discountList
-
-        return getMinPrice(target, discountList)
-    }
-
-    private fun appliedDiscounts(target: LocalDateTime): MutableList<Discount> {
-        if (discountList.isEmpty()) {
-            return mutableListOf()
-        }
-
+    fun discountedPrice(target: Instant): Double {
         val maxPriority = discountList
-            .map { it.getPriority(target) }
-            .maxWith (Priority.getComparator())
+            .filter { it.valid(target) }
+            .maxWith(DiscountCondition.comparator).getPriority()
 
-        return discountList
-            .filter { it.getPriority(target) == maxPriority }
-            .toMutableList()
-    }
-
-    private fun getMinPrice(target: LocalDateTime, discountList: List<Discount>): Double {
-        return discountList.fold(price) { acc, discount ->
-            minOf(
-                acc,
-                discount.getPrice(price, target))
-        }
+        return discountList.filter { it.getPriority() == maxPriority }
+            .minOfOrNull { it.getPrice(this@Product) }
+            ?: 0.0
     }
 
 }

@@ -23,6 +23,10 @@ public class RandomTestUtils {
         return random.nextLong();
     }
 
+    public static int randomInt() {
+        return random.nextInt();
+    }
+
     public static LocalDateTime randomLocalDateTime() {
         // 기준 시간: 현재
         LocalDateTime now = LocalDateTime.now();

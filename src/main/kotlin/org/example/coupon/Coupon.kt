@@ -1,5 +1,6 @@
 package org.example.coupon
 
+import org.example.Product
 import org.example.java.coupon.CouponStatus
 import org.example.java.coupon.CouponType
 import org.example.java.coupon.CouponType.FREE_DELIVERY
@@ -35,5 +36,9 @@ class Coupon private constructor(
         )
 
         private fun generateCode(): String = ""
+    }
+
+    fun apply(product: Product): Double{
+        return product.price
     }
 }

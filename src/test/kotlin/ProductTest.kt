@@ -1,10 +1,9 @@
-import org.example.Discount
+import org.example.DiscountCondition
 import org.example.Product
-import org.example.java.DiscountStrategy
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import java.time.LocalDateTime
+import java.time.Instant
 
 class ProductTest {
 
@@ -16,11 +15,12 @@ class ProductTest {
             RandomTestUtils.randomLong(),
             RandomTestUtils.randomAlphaString(),
             RandomTestUtils.randomDouble(),
+            RandomTestUtils.randomDouble(),
             listOf()
         )
 
         // when
-        val actual = product.discountedPrice(RandomTestUtils.randomLocalDateTime())
+        val actual = product.discountedPrice(Instant.now())
 
         // then
         Assertions.assertEquals(product.price, actual)
@@ -34,11 +34,12 @@ class ProductTest {
             RandomTestUtils.randomLong(),
             RandomTestUtils.randomAlphaString(),
             3000.0,
-            listOf(Discount(DiscountStrategy.FIXED, 1000.0))
+            0.0,
+            listOf(DiscountCondition.Fixed(1_000.0))
         )
 
         // when
-        val actual = product.discountedPrice(RandomTestUtils.randomLocalDateTime())
+        val actual = product.discountedPrice(Instant.now())
 
         // then
         Assertions.assertEquals(2000.0, actual)
@@ -52,11 +53,12 @@ class ProductTest {
             RandomTestUtils.randomLong(),
             RandomTestUtils.randomAlphaString(),
             3000.0,
-            listOf(Discount(DiscountStrategy.RATE, 0.1))
+            0.0,
+            listOf(DiscountCondition.Rate(0.1))
         )
 
         // when
-        val actual = product.discountedPrice(RandomTestUtils.randomLocalDateTime())
+        val actual = product.discountedPrice(Instant.now())
 
         // then
         Assertions.assertEquals(2700.0, actual)
@@ -70,14 +72,15 @@ class ProductTest {
             RandomTestUtils.randomLong(),
             RandomTestUtils.randomAlphaString(),
             3000.0,
+            0.0,
             listOf(
-                Discount(DiscountStrategy.RATE, 0.1, LocalDateTime.MIN, LocalDateTime.MAX),
-                Discount(DiscountStrategy.FIXED, 1000.0)
+                DiscountCondition.Rate(0.1),
+                DiscountCondition.Fixed(1_000.0)
             )
         )
 
         // when
-        val actual = product.discountedPrice(RandomTestUtils.randomLocalDateTime())
+        val actual = product.discountedPrice(Instant.now())
 
         // then
         Assertions.assertEquals(2700.0, actual)
@@ -87,17 +90,18 @@ class ProductTest {
     @DisplayName("기간 한정 할인 정책이 유효 기간이 지났을 경우 무시되어야 한다")
     fun should_skip_when_invalid_period() {
         // given
-        val start = LocalDateTime.of(2025, 1, 1, 0, 0)
-        val end = LocalDateTime.of(2026, 1, 1, 0, 0)
+        val start = Instant.parse("2025-01-01T00:00:00.00Z")
+        val end = Instant.parse("2026-01-01T00:00:00.00Z")
         val product = Product(
             RandomTestUtils.randomLong(),
             RandomTestUtils.randomAlphaString(),
             3000.0,
-            listOf(Discount(DiscountStrategy.RATE, 0.1, start, end))
+            0.0,
+            listOf(DiscountCondition.Rate(rate = 0.1, period = DiscountCondition.Period(start, end)))
         )
 
         // when
-        val actual = product.discountedPrice(LocalDateTime.of(2027, 1, 1, 0, 0))
+        val actual = product.discountedPrice(Instant.parse("2027-01-01T00:00:00.00Z"))
 
         // then
         Assertions.assertEquals(3000.0, actual)
@@ -111,11 +115,12 @@ class ProductTest {
             RandomTestUtils.randomLong(),
             RandomTestUtils.randomAlphaString(),
             3000.0,
-            listOf(Discount(DiscountStrategy.FIXED, 4000.0))
+            0.0,
+            listOf(DiscountCondition.Fixed(4_000.0))
         )
 
         // when
-        val actual = product.discountedPrice(RandomTestUtils.randomLocalDateTime())
+        val actual = product.discountedPrice(Instant.now())
 
         // then
         Assertions.assertEquals(0.0, actual)
@@ -129,16 +134,17 @@ class ProductTest {
             RandomTestUtils.randomLong(),
             RandomTestUtils.randomAlphaString(),
             3000.0,
+            0.0,
             listOf(
-                Discount(DiscountStrategy.RATE, 0.1, LocalDateTime.MIN, LocalDateTime.MAX),
-                Discount(DiscountStrategy.FIXED, 3000.0, LocalDateTime.MIN, LocalDateTime.MAX),
-                Discount(DiscountStrategy.RATE, 0.2),
-                Discount(DiscountStrategy.FIXED, 4000.0)
+                DiscountCondition.Rate(0.1),
+                DiscountCondition.Fixed(amount = 3_000.0),
+                DiscountCondition.Rate(0.2),
+                DiscountCondition.Fixed(amount = 4_000.0)
             )
         )
 
         // when
-        val actual = product.discountedPrice(RandomTestUtils.randomLocalDateTime())
+        val actual = product.discountedPrice(Instant.now())
 
         // then
         Assertions.assertEquals(2700.0, actual)
